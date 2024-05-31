@@ -3,7 +3,7 @@ import { Toaster, toast } from 'react-hot-toast'
 import MyTable from '../components/MyTable'
 import ButtonInfo from '../components/ButtonInfo'
 
-function Invoice() {
+const ARInvoice = () => {
 	const [invoiceNum, setInvoiceNum] = useState({
 		invoice1: '',
 		invoice2: '',
@@ -57,19 +57,9 @@ function Invoice() {
 		toast.success('Facturas creadas con éxito')
 	}
 
-	const sendInvoices = async () => {
-		alert('Enviando facturas...')
-
-		await fetch(`http://localhost:3000/factura/sendInvoices`, {
-			'content-type': 'application/json',
-			method: 'GET',
-			//mode: 'no-cors',
-		})
-	}
-
 	return (
 		<div>
-			<h2 className='font-semibold text-3xl mt-14 mb-14'>FACTURA FISCAL CM</h2>
+			<h2 className='font-semibold text-3xl mt-14 mb-14'>FACTURA FISCAL AR</h2>
 			<div className='grid grid-cols-3'>
 				{/* Grid 1 */}
 				<div className='bg-white mr-12 p-6 h-[280px] rounded-lg'>
@@ -108,7 +98,7 @@ function Invoice() {
 					<hr />
 					<div className='grid grid-flow-col justify-stretch mt-4 w-96 gap-4'>
 						<ButtonInfo name='Generar Facturas' onClick={callCreateInvoice} />
-						<ButtonInfo name='Enviar Facturas' onClick={sendInvoices} />
+						<ButtonInfo name='Enviar Facturas' />
 					</div>
 				</div>
 
@@ -123,4 +113,4 @@ function Invoice() {
 	)
 }
 
-export { Invoice }
+export { ARInvoice }

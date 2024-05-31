@@ -1,38 +1,32 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Invoice } from './pages/Invoice'
+import { ARInvoice } from './pages/ARInvoice'
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-// navbar
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
+
+import MyNavbar from './components/MyNavBar'
+import Sidebar from './components/Sidebar'
 
 function App() {
-	useEffect(() => {
-		fetch('http://localhost:3000/products/xmlTest', {
-			mode: 'no-cors',
-		})
-			.then((res) => res.json())
-			.then((data) => console.log(data))
-	}, [])
-
 	return (
-		<div className='dark'>
-			<Navbar bg='dark' data-bs-theme='dark' className='bg-body-tertiary'>
-				<Container>
-					<Navbar.Brand href='#'>MRI API</Navbar.Brand>
-					<Navbar.Toggle />
-					<Navbar.Collapse className='justify-content-end'>
-						<Nav>
-							<Nav.Link href='#'>Factura</Nav.Link>
-							<Nav.Link href='#'>Nota de crédito</Nav.Link>
-							<Nav.Link href='#'>Products</Nav.Link>
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
-			<Invoice />
-		</div>
+		<Router>
+			<div className=''>
+				<div className='grid grid-cols-6 '>
+					<Sidebar />
+					<div className='col-span-5'>
+						<MyNavbar />
+						<div className='ml-32'>
+							<div className='mt-16'>
+								<Routes>
+									<Route path='/' element={<Invoice />} />
+									<Route path='/arinvoices' element={<ARInvoice />} />
+								</Routes>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</Router>
 	)
 }
 

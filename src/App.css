@@ -1,14 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
 	background: #dfe3eb !important;
 }
 
-.table-text {
+/* .table-text {
 	font-size: 20px;
 	font-weight: 600;
 }
 
 .table-container {
-	max-height: 450px;
+	max-height: 250px;
 	overflow-y: auto;
 	box-shadow: 4px 4px 8px #bbbbbb;
 }
@@ -27,4 +31,4 @@ body {
 }
 .table-buttons button:hover {
 	box-shadow: 4px 4px 12px #999999;
-}
+} */
