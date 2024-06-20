@@ -5,6 +5,11 @@
 body {
 	background: #dfe3eb !important;
 }
+@media (min-width: 1280px) and (max-width: 1366px) {
+	.grid-cols-1-at-1280 {
+		grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+	}
+}
 
 /* .table-text {
 	font-size: 20px;

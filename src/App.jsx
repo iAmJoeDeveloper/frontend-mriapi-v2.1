@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Invoice } from './pages/Invoice';
 import { ARInvoice } from './pages/ARInvoice';
 import './App.css';
@@ -9,6 +9,12 @@ import Sidebar from './components/Sidebar';
 import { Login } from './components/Login';
 
 function App() {
+	const [sidebarOpen, setSidebarOpen] = useState(false);
+
+	const toggleSidebar = () => {
+		setSidebarOpen(!sidebarOpen);
+	};
+
 	return (
 		<Router>
 			<Routes>
@@ -16,11 +22,17 @@ function App() {
 				<Route
 					path="/*"
 					element={
-						<div className="grid grid-cols-6">
-							<Sidebar />
-							<div className="col-span-5">
-								<MyNavbar />
-								<div className="ml-32">
+						<div className="xl:flex ">
+							<div
+								className={`${
+									sidebarOpen ? 'block' : 'hidden'
+								} xl:block xl:w-1/6`}
+							>
+								<Sidebar isOpen={sidebarOpen} />
+							</div>
+							<div className=" xl:flex flex-wrap items-center justify-center">
+								<MyNavbar toggleSidebar={toggleSidebar} />
+								<div className="xl:ml-32">
 									<div className="mt-16">
 										<Routes>
 											<Route path="/" element={<Invoice />} />
