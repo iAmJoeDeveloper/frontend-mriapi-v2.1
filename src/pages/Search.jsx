@@ -4,27 +4,26 @@ import ButtonInfo from '../components/ButtonInfo'
 const Search = () => {
 	const [data, setData] = useState(null)
 	const [error, setError] = useState(null)
-	const [consult, setConsult] = useState('')
+	const [inputValue, setInputValue] = useState('')
 
 	const handleChange = (e) => {
-		setConsult(e.target.value)
-		console.log(consult)
+		setInputValue(e.target.value)
 	}
 
-	const testAPI = async (e) => {
-		e.preventDefault()
+	// const testAPI = async (e) => {
+	// 	e.preventDefault()
 
-		try {
-			//Await Fetch
-			const request = await fetch(`https://pokeapi.co/api/v2/characteristic/${consult}`)
-			const response = await request.json()
-			setData(response)
-		} catch (error) {
-			// Handle your error
-			setError(error)
-			console.log(error)
-		}
-	}
+	// 	try {
+	// 		//Await Fetch
+	// 		const request = await fetch(`https://pokeapi.co/api/v2/characteristic/${consult}`)
+	// 		const response = await request.json()
+	// 		setData(response)
+	// 	} catch (error) {
+	// 		// Handle your error
+	// 		setError(error)
+	// 		console.log(error)
+	// 	}
+	// }
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
@@ -32,8 +31,12 @@ const Search = () => {
 		setError(null)
 		setData(null)
 
+		const url = inputValue
+			? `http://localhost:3000/consultInbox/${inputValue}`
+			: 'http://localhost:3000/consultInbox'
+
 		try {
-			const response = await fetch('http://localhost:3000/consultInbox')
+			const response = await fetch(url)
 			if (!response.ok) {
 				throw new Error(`Network response was not ok: ${response.statusText}`)
 			}
@@ -63,7 +66,7 @@ const Search = () => {
 									placeholder='N Factura 1'
 									name='invoice1'
 									onChange={handleChange}
-									value={consult}
+									value={inputValue}
 								/>
 								{/* Botones */}
 								<div className=''>
