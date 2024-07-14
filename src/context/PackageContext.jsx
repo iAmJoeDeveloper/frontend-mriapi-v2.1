@@ -14,8 +14,6 @@ const PackageProvider = ({ children }) => {
 			.catch((error) => console.log('Error fetching packages: ', error))
 	}, [])
 
-	console.log(packages)
-
 	return <PackageContext.Provider value={{ packages }}>{children}</PackageContext.Provider>
 }
 
