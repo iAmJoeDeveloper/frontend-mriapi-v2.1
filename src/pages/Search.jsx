@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ButtonInfo from '../components/ButtonInfo'
+import { FaSearch } from 'react-icons/fa'
 
 const Search = () => {
 	const [data, setData] = useState(null)
@@ -50,27 +51,28 @@ const Search = () => {
 	}
 
 	return (
-		<div className='container w-dvw'>
-			<h2 className='font-semibold text-3xl my-10 text-center xl:text-start'>CONSULTA</h2>
-
-			<div className='bg-white h-auto  p-6 rounded-lg xl:mr-20'>
+		<div className='flex flex-col items-center justify-center w-[90%]'>
+			<div className='bg-[#292D32] h-52 w-2/4 p-6 rounded-3xl  shadow-2xl shadow-[#4D4D4D] '>
 				<form onSubmit={onSubmit} autoComplete='off'>
-					<div className='mb-4'>
-						<div className='w-full'>
-							<p className='text-black mb-2'>Número de factura</p>
-							<div className='grid grid-cols-1 xl:grid-cols-4 gap-4'>
+					<div className='mb-6'>
+						<div className=''>
+							<p className='text-white font-bold text-2xl mb-6'>NÚMERO DE FACTURA</p>
+							<div className='grid grid-cols-1 xl:grid-cols-12 gap-4'>
 								<input
 									autoFocus
 									type='text'
-									className='w-full py-2 px-4 rounded-lg outline-none bg-[#b2bec3] text-white placeholder-white'
-									placeholder='N Factura 1'
+									className='col-span-4 py-2 px-4 rounded-lg outline-none bg-[#b2bec3] text-white placeholder-white'
+									placeholder='Ingrese consulta...'
 									name='invoice1'
 									onChange={handleChange}
 									value={inputValue}
 								/>
 								{/* Botones */}
 								<div className=''>
-									<ButtonInfo name='Consultar' />
+									<button className='relative flex items-center gap-4 py-2 px-5 text-md overflow-hidden  bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md text-black hover:bg-gray-300 '>
+										<FaSearch />
+										CONSULTAR
+									</button>
 								</div>
 							</div>
 						</div>
@@ -79,7 +81,7 @@ const Search = () => {
 				<hr />
 			</div>
 			{/*  */}
-			<div className='rounded-lg whitespace-pre-wrap bg-gray-800 text-white p-2 mt-10 mb-20 w-vw mr-20'>
+			<div className='rounded-lg whitespace-pre-wrap bg-gray-800 text-white p-2 mt-10 mb-20 h-96  w-full  scro  shadow-2xl shadow-[#4D4D4D]'>
 				{error && <div>Error: {error.message}</div>}
 				{/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
 				{data && <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{data}</pre>}

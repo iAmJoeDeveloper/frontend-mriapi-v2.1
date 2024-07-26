@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	background: #dfe3eb !important;
+	background: #292d32;
 }
 @media (min-width: 1280px) and (max-width: 1366px) {
 	.grid-cols-1-at-1280 {

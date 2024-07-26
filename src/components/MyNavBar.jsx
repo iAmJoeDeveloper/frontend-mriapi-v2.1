@@ -1,17 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 const MyNavBar = ({ toggleSidebar }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const location = useLocation();
+	const [title, setTitle] = useState('');
+
+	useEffect(() => {
+		const pathToTitle = {
+			'/': 'Factura Fiscal CM',
+			'/ARInvoices': 'Factura Fiscal AR',
+			'/Packages': 'Packages',
+			'/Search': 'Consulta',
+			// Agrega más rutas y títulos según sea necesario
+		};
+		const currentTitle = pathToTitle[location.pathname] || '';
+		setTitle(currentTitle);
+	}, [location.pathname]);
 
 	const handleToggleSidebar = () => {
 		setIsOpen(!isOpen);
 		toggleSidebar();
 	};
 	return (
-		<div className="w-full xl:w-full lg:w-screen min-h-20 h-20 bg-white text-black p-4 flex items-center justify-between xl:justify-center">
-			<h1 className="uppercase font-semibold cursor-pointer text-xl lg:ml-48 ml-4 hidden xl:block">
-				MRI BAVEL
+		<div className=" w-full xl:w-full h-20 rounded-tl-[60px] lg:w-screen bg-white text-black p-4 flex items-center  xl:justify-center ">
+			<h1 className="uppercase cursor-pointer text-2xl font-bold lg:ml-48 ml-4 hidden xl:block">
+				{title}
 			</h1>
 			<nav className="flex items-center ml-auto">
 				<button className="xl:hidden mr-4" onClick={handleToggleSidebar}>
@@ -28,7 +43,7 @@ const MyNavBar = ({ toggleSidebar }) => {
 						className="w-10 h-10 bg-gray-500  rounded-3xl hidden xl:block"
 					/>
 					<div>
-						<h3 className="font-bold text-black mb-[-5px] hidden xl:block">
+						<h3 className="font-bold text-black  hidden xl:block">
 							BlueMall User
 						</h3>
 						<span className="text-sm hidden xl:block">Admin</span>

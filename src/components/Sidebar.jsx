@@ -8,7 +8,7 @@ const Sidebar = ({ isOpen }) => {
 
 	function Linkness(type = null) {
 		let classes =
-			'flex items-center gap-4 p-2 hover:bg-gray-300 hover:text-black transition-colors rounded-lg'
+			'flex items-center gap-4 p-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 
 		if (type === subpage) {
 			classes += ' text-black bg-gray-200 '
@@ -21,15 +21,15 @@ const Sidebar = ({ isOpen }) => {
 
 	return (
 		<aside
-			className={`fixed z-20 top-0 left-0 flex flex-col justify-between gap-8 bg-[#3F3F40] text-white h-screen pt-8 p-4 transition-transform duration-300 ${
+			className={`fixed  z-20 top-0 left-0 flex flex-col justify-between gap-8 bg-[#292D32] w-80 text-white h-screen pt-8 pl-4 transition-transform duration-300 ${
 				isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
 			}`}
 		>
 			{/* <!-- Top --> */}
 			<section>
 				{/* <!-- Logo --> */}
-				<div className='logo flex flex-col items-center justify-center  mb-8'>
-					<h2 className='text-3xl font-bold'>MRI API</h2>
+				<div className='logo flex flex-col items-center justify-center  mb-6'>
+					<h2 className='text-4xl font-bold '>MRI API</h2>
 					<p className='text-gray-400'>Invoice Management Dashboard</p>
 				</div>
 				{/* <!-- Search --> */}
@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4 p-2 hover:bg-gray-200 hover:text-black transition-colors rounded-lg'
+							className='flex items-center gap-6  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen }) => {
 								viewBox='0 0 24 24'
 								strokeWidth={1.5}
 								stroke='currentColor'
-								className='w-5 h-5'
+								className='w-6 h-6'
 							>
 								<path
 									strokeLinecap='round'
@@ -65,7 +65,7 @@ const Sidebar = ({ isOpen }) => {
 					</li>
 				</ul>
 				<hr className='my-8' />
-				<h5 className='uppercase font-semibold text-xs text-white tracking-[2px] mb-4 '>Menu</h5>
+				<h5 className='uppercase font-bold text-md text-white mb-2 '>Menu</h5>
 				<ul>
 					<li>
 						<NavLink to='/' className={Linkness('')}>
@@ -108,7 +108,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4 p-2 hover:bg-gray-200 hover:text-black transition-colors rounded-lg'
+							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -147,7 +147,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4 p-2 hover:bg-gray-200 hover:text-black transition-colors rounded-lg'
+							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -167,14 +167,12 @@ const Sidebar = ({ isOpen }) => {
 						</a>
 					</li>
 				</ul>
-				<h5 className='uppercase font-semibold text-xs text-white tracking-[2px] my-4'>
-					Proyectos
-				</h5>
+				<h5 className='uppercase font-bold text-md text-white my-2'>Proyectos</h5>
 				<ul>
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4 p-2 hover:bg-gray-200 hover:text-black transition-colors rounded-lg'
+							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -196,7 +194,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4 p-2 hover:bg-gray-200 hover:text-black transition-colors rounded-lg'
+							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -224,7 +222,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4 p-2 text-gray-500 hover:bg-gray-200 hover:text-black transition-colors rounded-lg'
+							className='flex items-center gap-6  text-gray-500 hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -245,7 +243,7 @@ const Sidebar = ({ isOpen }) => {
 									d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
 								/>
 							</svg>
-							<span>Ajustes</span>
+							<span className='font-bold '>Ajustes</span>
 						</a>
 					</li>
 				</ul>

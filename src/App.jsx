@@ -32,13 +32,16 @@ function App() {
 						path='/*'
 						element={
 							<div className='xl:flex '>
-								<div className={`${sidebarOpen ? 'block' : 'hidden'} xl:block xl:w-1/6`}>
+								<div className={`${sidebarOpen ? 'block' : 'hidden'} xl:block xl:w-1/6 rounded-xl`}>
 									<Sidebar isOpen={sidebarOpen} />
 								</div>
-								<div className=' xl:flex flex-wrap items-center justify-center'>
-									<MyNavbar toggleSidebar={toggleSidebar} />
-									<div className='xl:ml-32'>
-										<div className='mt-16'>
+
+								<div className='xl:flex h-screen flex-wrap items-center justify-center  bg-white w-[90%]  z-30 rounded-l-[60px]'>
+									<div className='fixed top-0 right-0 w-[80%] z-40'>
+										<MyNavbar toggleSidebar={toggleSidebar} />
+									</div>
+									<div className='xl:ml-32 mt-20 w-full flex items-center justify-center'>
+										<div className=''>
 											<Routes>
 												<Route path='/' element={<Invoice />} />
 												<Route path='/arinvoices' element={<ARInvoice />} />
