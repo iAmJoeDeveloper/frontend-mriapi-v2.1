@@ -14,7 +14,18 @@ const PackageProvider = ({ children }) => {
 			.catch((error) => console.log('Error fetching packages: ', error))
 	}, [])
 
-	return <PackageContext.Provider value={{ packages }}>{children}</PackageContext.Provider>
+	// Función para actualizar el estado de un paquete específico
+	const updatePackageStatus = (id, updatedData) => {
+		setPackages((prevPackages) =>
+			prevPackages.map((pkg) => (pkg._id === id ? { ...pkg, ...updatedData } : pkg))
+		)
+	}
+
+	return (
+		<PackageContext.Provider value={{ packages, updatePackageStatus }}>
+			{children}
+		</PackageContext.Provider>
+	)
 }
 
 export { PackageProvider }

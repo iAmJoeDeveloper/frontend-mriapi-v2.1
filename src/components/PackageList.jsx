@@ -26,6 +26,9 @@ const PackageList = () => {
 								ID
 							</th>
 							<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
+								Entity
+							</th>
+							<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
 								Name
 							</th>
 							<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
@@ -45,6 +48,7 @@ const PackageList = () => {
 							.map((item) => (
 								<tr key={item.id}>
 									<td className='py-2 px-4 border-b border-gray-300'>{item.id}</td>
+									<td className='py-2 px-4 border-b border-gray-300'>{item.entity}</td>
 									<td className='py-2 px-4 border-b border-gray-300'>{item.name}</td>
 									<td className='py-2 px-4 border-b border-gray-300'>{item.createdAt}</td>
 									<td className='py-2 px-4 border-b border-gray-300'>
