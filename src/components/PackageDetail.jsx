@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PackageContext } from '../context/PackageContext'
+import { Toaster, toast } from 'react-hot-toast'
 
 const PackageDetail = () => {
 	const { packages, updatePackageStatus } = useContext(PackageContext)
@@ -78,19 +79,58 @@ const PackageDetail = () => {
 	}
 
 	const generateQRCodes = async () => {
+		// toast.promise(
+		// 	fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
+		// 		'content-type': 'application/json',
+		// 		method: 'GET',
+		// 	}).then((response) => {
+		// 		if (!response.ok) {
+		// 			throw new Error('Error en la generación de códigos QR')
+		// 		}
+		// 		console.log(response)
+		// 	}),
+		// 	{
+		// 		loading: 'Generating QR codes...',
+		// 		success: <b>QR codes generated successfully!</b>,
+		// 		error: <b>Error generating QR codes.</b>,
+		// 	}
+		// )
+
 		try {
-			const response = await fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
-				'content-type': 'application/json',
-				method: 'GET',
-				//mode: 'no-cors',
-			}).then((response) => console.log(response))
+			toast.promise(
+				fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
+					'content-type': 'application/json',
+					method: 'GET',
+				}).then((response) => {
+					if (!response.ok) {
+						throw new Error('Error en la generación de códigos QR')
+					}
+					console.log(response)
+				}),
+				{
+					loading: 'Generating QR codes...',
+					success: <b>QR codes generated successfully!</b>,
+					error: <b>Error generating QR codes.</b>,
+				}
+			)
 		} catch (error) {
 			console.error('Error gerando códigos:', error)
 		}
+
+		// try {
+		// 	const response = await fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
+		// 		'content-type': 'application/json',
+		// 		method: 'GET',
+		// 		//mode: 'no-cors',
+		// 	}).then((response) => console.log(response))
+		// } catch (error) {
+		// 	console.error('Error gerando códigos:', error)
+		// }
 	}
 
 	return (
 		<div className='flex flex-col gap-6 '>
+			<Toaster position='bottom-right' reverseOrder={true} />
 			<div className='flex flex-col dark:bg-[#292D32] dark:border-[#292D32] text-white w-3/6 p-6 rounded-lg gap-3 '>
 				<h1 className='text-xl font-smibold'>
 					Package ID: <span className='font-normal'>{pkg._id}</span>
