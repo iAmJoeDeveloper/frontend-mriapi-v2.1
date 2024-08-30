@@ -77,7 +77,9 @@ function Invoice() {
 					<form onSubmit={handleSubmit} autoComplete='off'>
 						<div className='mb-8'>
 							<div className='w-full'>
-								<p className='text-white font-smibold text-2xl mb-6'>CONSULTAR RANGO DE FACTURAS</p>
+								<p className='text-white font-smibold text-2xl mb-6'>
+									Consultar rango de facturas CM
+								</p>
 								<div className='flex items-center gap-20 '>
 									<div className='flex gap-4 w-3/5 h-10'>
 										<input
