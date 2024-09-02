@@ -38,21 +38,21 @@ const ARInvoice = () => {
 
 	const callCreateInvoice = async (e) => {
 		e.preventDefault()
-		// const create = true
+		const create = true
 
-		// await fetch(
-		// 	`http://localhost:3000/factura/batch/${invoiceNum.invoice1}/${invoiceNum.invoice2}/${create}`,
-		// 	{
-		// 		'content-type': 'application/json',
-		// 		method: 'GET',
-		// 		//mode: 'no-cors',
-		// 	}
-		// )
-		// 	.then((response) => response.json())
-		// 	.then((data) => setDatas(data))
+		await fetch(
+			`http://localhost:3000/arinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}/${create}`,
+			{
+				'content-type': 'application/json',
+				method: 'GET',
+				//mode: 'no-cors',
+			}
+		)
+			.then((response) => response.json())
+			.then((data) => setDatas(data))
 
-		// console.log('enviado el array de datas')
-		// toast.success('Facturas creadas con éxito')
+		console.log('enviado el array de datas')
+		toast.success('Facturas creadas con éxito')
 	}
 
 	return (
