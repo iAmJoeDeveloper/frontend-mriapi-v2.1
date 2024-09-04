@@ -8,7 +8,7 @@ const Sidebar = ({ isOpen }) => {
 
 	function Linkness(type = null) {
 		let classes =
-			'flex items-center gap-4 p-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+			'flex items-center gap-4 hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 
 		if (type === subpage) {
 			classes += ' text-black bg-gray-200 '
@@ -21,16 +21,16 @@ const Sidebar = ({ isOpen }) => {
 
 	return (
 		<aside
-			className={`fixed  z-20 top-0 left-0 flex flex-col justify-between gap-8 bg-[#292D32] w-80 text-white h-screen pt-8 pl-4 transition-transform duration-300 ${
+			className={`fixed z-20 top-0 left-0 flex flex-col justify-between gap-8 bg-[#292D32] 2xl:w-80 xl:w-72 md:w-72  text-white h-screen pt-8 pl-4 transition-transform duration-300 ${
 				isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
 			}`}
 		>
 			{/* <!-- Top --> */}
 			<section>
 				{/* <!-- Logo --> */}
-				<div className='logo flex flex-col items-center justify-center  mb-6'>
+				<div className='logo flex flex-col items-center justify-center mb-6 w-[90%]'>
 					<h2 className='text-4xl font-bold '>MRI API</h2>
-					<p className='text-gray-400'>Invoice Management Dashboard</p>
+					<p className='text-gray-400 text-center'>Invoice Management Dashboard</p>
 				</div>
 				{/* <!-- Search --> */}
 				{/* <form>
@@ -40,11 +40,11 @@ const Sidebar = ({ isOpen }) => {
 						placeholder='Buscador'
 					/>
 				</form> */}
-				<ul className='mt-4 mb-8'>
+				<ul className='mt-4 2xl:mb-8 xl:mb-4 md:mb-8'>
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-6  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+							className='flex items-center gap-6  hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -64,7 +64,7 @@ const Sidebar = ({ isOpen }) => {
 						</a>
 					</li>
 				</ul>
-				<hr className='my-8' />
+				<hr className='2xl:my-8 xl:my-4 md:my-8' />
 				<h5 className='uppercase font-bold text-md text-white mb-2 '>Menu</h5>
 				<ul>
 					<li>
@@ -108,7 +108,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+							className='flex items-center gap-4  hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -147,7 +147,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+							className='flex items-center gap-4  hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -172,7 +172,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+							className='flex items-center gap-4  hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -194,7 +194,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-4  hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+							className='flex items-center gap-4  hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
@@ -222,7 +222,7 @@ const Sidebar = ({ isOpen }) => {
 					<li>
 						<a
 							href='#'
-							className='flex items-center gap-6  text-gray-500 hover:bg-white hover:text-black p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
+							className='flex items-center gap-6  text-gray-500 hover:bg-white hover:text-black 2xl:p-4 xl:p-2 md:p-4 rounded-tl-3xl rounded-bl-3xl group transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'

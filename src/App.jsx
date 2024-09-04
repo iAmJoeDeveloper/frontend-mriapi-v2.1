@@ -36,11 +36,11 @@ function App() {
 									<Sidebar isOpen={sidebarOpen} />
 								</div>
 
-								<div className='xl:flex h-screen flex-wrap items-center justify-center  bg-white w-[90%]  z-30 rounded-l-[60px]'>
-									<div className='fixed top-0 right-0 w-[80%] z-40'>
+								<div className='xl:flex justify-between items-center h-screen  bg-white w-[80%] 2xl:w-[90%] xl:w-[90%] md:w-[100%] 2xl:z-30 z-10 2xl:rounded-l-[20px] '>
+									<div className='fixed top-0 right-0 w-[100%] 2xl:w-[80%] xl:w-[90%]'>
 										<MyNavbar toggleSidebar={toggleSidebar} />
 									</div>
-									<div className='xl:ml-32 mt-20 w-full flex items-center justify-center'>
+									<div className='xl:ml-32 2xl:ml-32 2xl:mt-auto xl:mt-auto w-full flex items-center justify-center'>
 										<div className=''>
 											<Routes>
 												<Route path='/' element={<Invoice />} />

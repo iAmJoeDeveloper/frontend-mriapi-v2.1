@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ButtonInfo from '../components/ButtonInfo'
+// import ButtonInfo from '../components/ButtonInfo';
 import { FaSearch } from 'react-icons/fa'
 
 const Search = () => {
@@ -51,8 +51,8 @@ const Search = () => {
 	}
 
 	return (
-		<div className='flex flex-col items-center justify-center w-[90%]'>
-			<div className='bg-[#292D32] h-52 w-2/4 p-6 rounded-3xl  shadow-2xl shadow-[#4D4D4D] '>
+		<div className='flex flex-col items-center justify-center h-screen 2xl:w-[95%] xl:w-[95%]  md:w-[100%] 2xl:pt-0 md:pt-24'>
+			<div className='bg-[#292D32] h-52 2xl:w-2/4 md:w-5/6 p-6 rounded-xl  shadow-2xl shadow-[#4D4D4D] '>
 				<form onSubmit={onSubmit} autoComplete='off'>
 					<div className='mb-6'>
 						<div className=''>
@@ -78,10 +78,10 @@ const Search = () => {
 						</div>
 					</div>
 				</form>
-				<hr />
+				<hr className='hidden md:hidden xl:flex 2xl:flex' />
 			</div>
 			{/*  */}
-			<div className='rounded-lg whitespace-pre-wrap bg-gray-800 text-white p-2 mt-10 mb-20 h-96  w-full  scro  shadow-2xl shadow-[#4D4D4D]'>
+			<div className='rounded-lg whitespace-pre-wrap bg-gray-800 text-white p-4 mt-10 mb-20 h-96 xl:h-[400px] md:h-96 w-full md:w-[650px]  xl:w-full shadow-2xl shadow-[#4D4D4D] overflow-y-auto overflow-x-hidden'>
 				{error && <div>Error: {error.message}</div>}
 				{/* {data && <pre>{JSON.stringify(data, null, 2)}</pre>} */}
 				{data && <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{data}</pre>}

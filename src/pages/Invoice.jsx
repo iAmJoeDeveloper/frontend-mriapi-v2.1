@@ -71,22 +71,22 @@ function Invoice() {
 	// grid grid-cols-1 lg:grid-cols-2 md:grid-cols-1 xl:grid-cols-3  gap-4 grid-cols-1-at-1280
 	return (
 		<div className='container mx-auto'>
-			<div className='flex flex-col justify-center items-center'>
+			<div className='flex flex-col  justify-center items-center xl:pt-0 md:pt-24'>
 				{/* Grid 1 */}
-				<div className='bg-[#292D32] h-auto xl:h-72 p-10 w-3/5 rounded-[30px] xl:mr-12  shadow-lg shadow-[#4D4D4D]'>
+				<div className='bg-[#292D32] md:h-60 2xl:h-72 xl:h-60  2xl:p-10 xl:p-8 md:p-5 2xl:w-3/5 xl:w-5/6 md:w-full rounded-[10px] shadow-lg shadow-[#4D4D4D] '>
 					<form onSubmit={handleSubmit} autoComplete='off'>
-						<div className='mb-8'>
+						<div className='2xl:mb-8 xl:mb-6 md:mb-6'>
 							<div className='w-full'>
-								<p className='text-white font-smibold text-2xl mb-6'>
+								<p className='text-white font-semibold 2xl:text-2xl xl:text-xl 2xl:mb-6 xl:mb-4 md:mb-2'>
 									Consultar rango de facturas CM
 								</p>
-								<div className='flex items-center gap-20 '>
-									<div className='flex gap-4 w-3/5 h-10'>
+								<div className='flex items-center gap-20'>
+									<div className='flex  gap-4 w-3/5 h-10'>
 										<input
 											required
 											autoFocus
 											type='text'
-											className='w-full py-2 px-4 rounded-lg outline-none bg-white text-black  shadow-lg shadow-black'
+											className='w-full 2xl:py-2 2xl:px-4 xl:py-1 xl:px-2 md:py-1 md:px-2 rounded-lg outline-none bg-white text-black   '
 											placeholder='N Factura 1'
 											onChange={handleChange}
 											value={invoiceNum.invoice1}
@@ -95,7 +95,7 @@ function Invoice() {
 										<input
 											required
 											type='text'
-											className='w-full py-2 px-4 rounded-lg outline-none  bg-white text-black  shadow-lg shadow-black'
+											className='w-full 2xl:py-2 2xl:px-4 xl:py-1 xl:px-2 md:py-1 md:px-2 rounded-lg outline-none  bg-white text-black '
 											placeholder='N Factura 2'
 											onChange={handleChange}
 											value={invoiceNum.invoice2}
@@ -113,17 +113,17 @@ function Invoice() {
 						{/* Botones */}
 					</form>
 					<hr />
-					<div className='mt-12 flex justify-center gap-10 w-full flex-col xl:flex-row lg:space-x-4 space-y-4 xl:space-y-0'>
+					<div className='2xl:mt-12 xl:mt-8  flex justify-center 2xl:gap-10 xl:gap-5 md:mt-8 md:gap-5 w-full flex-col md:flex-row xl:flex-row 2xl:space-x-4 xl:space-x-6 space-y-4 md:space-y-0 xl:space-y-0'>
 						<button
 							onClick={callCreateInvoice}
-							className='relative flex items-center gap-4 py-2 px-5 text-black text-md overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md  hover:bg-[white] hover:bg-gray-300'
+							className=' flex items-center gap-4 py-2 px-5 w-52  text-black text-md overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md  hover:bg-gray-300'
 						>
 							<LiaFileInvoiceSolid className='w-6 h-6' />
 							Generar Facturas
 						</button>
 						<button
 							onClick={sendInvoices}
-							className='flex items-center gap-4 py-2 px-5 text-black text-md  overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md  hover:bg-gray-300'
+							className='flex items-center gap-4 py-2 px-5 w-52  text-black text-md  overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md  hover:bg-gray-300'
 						>
 							<LiaFileInvoiceDollarSolid />
 							Enviar Facturas
@@ -134,9 +134,9 @@ function Invoice() {
 				</div>
 
 				{/* Grid 2 */}
-				<div className='mt-14'>
+				<div className='2xl:mt-14 xl:mt-8 md:mt-8'>
 					<div className='overflow-auto'>
-						<div className='w-[1200px] mb-6 '>
+						<div className='2xl:w-[1200px] xl:w-auto md:w-[700px] mb-6 '>
 							<MyTable datas={datas} />
 						</div>
 					</div>

@@ -129,101 +129,103 @@ const PackageDetail = () => {
 	}
 
 	return (
-		<div className='flex flex-col gap-6 '>
-			<Toaster position='bottom-right' reverseOrder={true} />
-			<div className='flex flex-col dark:bg-[#292D32] dark:border-[#292D32] text-white w-3/6 p-6 rounded-lg gap-3 '>
-				<h1 className='text-xl font-smibold'>
-					Package ID: <span className='font-normal'>{pkg._id}</span>
-					{isRunning ? <span className='ml-2'>🟢</span> : <span className='ml-2'>🔴</span>}
-				</h1>
-				<p className='text-lg font-semibold'>
-					Entity: <span className='font-normal'>{pkg.entity}</span>
-				</p>
-				<p className='text-lg font-semibold'>
-					Status: <span className='font-normal'>{pkg.status}</span>
-				</p>
-				<div className='flex flex-row  space-x-4'>
-					<button
-						onClick={startInterval}
-						disabled={isRunning}
-						className={`w-3/5 py-2 px-4 text-lg  overflow-hidden  rounded-lg transition-all duration-400 ease-in-out shadow-md text-black ${
-							isRunning
-								? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-								: 'bg-white text-gray hover:bg-gray-200'
-						}`}
-					>
-						Check Status
-					</button>
+		<div className='flex flex-col h-screen justify-center items-center overflow-hidden '>
+			<div className='xl:pt-40 2xl:pt-0 md:pt-0 '>
+				<Toaster position='bottom-right' reverseOrder={true} />
+				<div className='flex flex-col dark:bg-[#292D32] dark:border-[#292D32] text-white 2xl:w-3/6 xl:w-4/6 md:w-5/6  p-6 rounded-lg gap-3'>
+					<h1 className='text-xl font-semibold'>
+						Package ID: <span className='font-normal'>{pkg._id}</span>
+						{isRunning ? <span className='ml-2'>🟢</span> : <span className='ml-2'>🔴</span>}
+					</h1>
+					<p className='text-lg font-semibold'>
+						Entity: <span className='font-normal'>{pkg.entity}</span>
+					</p>
+					<p className='text-lg font-semibold'>
+						Status: <span className='font-normal'>{pkg.status}</span>
+					</p>
+					<div className='flex flex-row  space-x-4'>
+						<button
+							onClick={startInterval}
+							disabled={isRunning}
+							className={`w-3/5 py-2 px-4 text-lg  overflow-hidden  rounded-lg transition-all duration-400 ease-in-out shadow-md text-black ${
+								isRunning
+									? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+									: 'bg-white text-gray hover:bg-gray-200'
+							}`}
+						>
+							Check Status
+						</button>
 
-					<button
-						onClick={stopInterval}
-						disabled={!isRunning}
-						className={`w-3/5 py-2 px-4 text-lg  overflow-hidden  rounded-lg transition-all duration-400 ease-in-out shadow-md text-black ${
-							!isRunning
-								? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-								: 'bg-blue-500 text-white hover:bg-blue-600'
-						}`}
-					>
-						Stop Check
-					</button>
+						<button
+							onClick={stopInterval}
+							disabled={!isRunning}
+							className={`w-3/5 py-2 px-4 text-lg  overflow-hidden  rounded-lg transition-all duration-400 ease-in-out shadow-md text-black ${
+								!isRunning
+									? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+									: 'bg-blue-500 text-white hover:bg-blue-600'
+							}`}
+						>
+							Stop Check
+						</button>
+					</div>
+					<div>
+						<button
+							onClick={generateQRCodes}
+							disabled={packageCompleted === 'pending'}
+							className={`w-full py-2 px-4 text-lg  overflow-hidden  rounded-lg transition-all duration-400 ease-in-out shadow-md text-black ${
+								packageCompleted === 'pending'
+									? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+									: 'bg-blue-500 text-white hover:bg-blue-600'
+							}`}
+						>
+							Generate QR Codes 🗳
+						</button>
+					</div>
 				</div>
-				<div>
-					<button
-						onClick={generateQRCodes}
-						disabled={packageCompleted === 'pending'}
-						className={`w-full py-2 px-4 text-lg  overflow-hidden  rounded-lg transition-all duration-400 ease-in-out shadow-md text-black ${
-							packageCompleted === 'pending'
-								? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-								: 'bg-blue-500 text-white hover:bg-blue-600'
-						}`}
-					>
-						Generate QR Codes 🗳
-					</button>
-				</div>
-			</div>
-			<h2 className='text-lg font-bold'>INVOICES</h2>
-			<div className='overflow-x-auto rounded-xl h-96 '>
-				<div className='overflow-y-auto h-full'>
-					<table className='w-[1200px] bg-white '>
-						<thead>
-							<tr className='sticky top-0 z-10'>
-								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
-									ID
-								</th>
-								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
-									Name
-								</th>
-								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
-									Fecha
-								</th>
-								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
-									Estado
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{pkg.invoices.map((invoice, index) => (
-								<tr key={index}>
-									<td className='py-2 px-4 border-b border-gray-300'>{invoice.ncf}</td>
-									<td className='py-2 px-4 border-b border-gray-300'>{invoice.ref}</td>
-									<td className='py-2 px-4 border-b border-gray-300'>{invoice.date}</td>
-									<td className='py-2 px-4 border-b border-gray-300'>
-										<p
-											className={
-												invoice.status === 'completed'
-													? 'bg-green-200 rounded-full  w-28  text-black   bg-center py-1  text-center'
-													: invoice.status === 'rejected'
-													? 'bg-red-600 rounded-full  w-28  text-white   bg-center py-1  text-center'
-													: 'bg-orange-400 rounded-full  w-28  text-black   bg-center py-1  text-center'
-											}
-										>
-											{invoice.status}
-										</p>
-									</td>
+				<h2 className='text-lg font-bold my-4'>INVOICES</h2>
+				<div className='overflow-x-auto rounded-xl h-96 '>
+					<div className='overflow-y-auto h-full'>
+						<table className='2xl:w-[1200px] xl:w-[800px] md:w-[650px] bg-white'>
+							<thead>
+								<tr className='sticky top-0 z-10'>
+									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
+										ID
+									</th>
+									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
+										Name
+									</th>
+									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
+										Fecha
+									</th>
+									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
+										Estado
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{pkg.invoices.map((invoice, index) => (
+									<tr key={index}>
+										<td className='py-2 px-4 border-b border-gray-300'>{invoice.ncf}</td>
+										<td className='py-2 px-4 border-b border-gray-300'>{invoice.ref}</td>
+										<td className='py-2 px-4 border-b border-gray-300'>{invoice.date}</td>
+										<td className='py-2 px-4 border-b border-gray-300'>
+											<p
+												className={
+													invoice.status === 'completed'
+														? 'bg-green-200 rounded-full  w-28  text-black   bg-center py-1  text-center'
+														: invoice.status === 'rejected'
+														? 'bg-red-600 rounded-full  w-28  text-white   bg-center py-1  text-center'
+														: 'bg-orange-400 rounded-full  w-28  text-black   bg-center py-1  text-center'
+												}
+											>
+												{invoice.status}
+											</p>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

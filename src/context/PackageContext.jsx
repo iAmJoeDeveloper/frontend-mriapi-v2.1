@@ -5,6 +5,10 @@ export const PackageContext = createContext()
 const PackageProvider = ({ children }) => {
 	const [packages, setPackages] = useState([])
 
+	const removePackage = (packageId) => {
+		setPackages((prevPackages) => prevPackages.filter((pkg) => pkg._id !== packageId))
+	}
+
 	useEffect(() => {
 		// Fetch packages from the API
 		fetch('http://localhost:3000/packages')
@@ -22,7 +26,7 @@ const PackageProvider = ({ children }) => {
 	}
 
 	return (
-		<PackageContext.Provider value={{ packages, updatePackageStatus }}>
+		<PackageContext.Provider value={{ packages, updatePackageStatus, removePackage }}>
 			{children}
 		</PackageContext.Provider>
 	)
