@@ -15,6 +15,7 @@ import { PackageDetail } from './components/PackageDetail'
 import { Invoice } from './pages/Invoice'
 import { ARInvoice } from './pages/ARInvoice'
 import { Search } from './pages/Search'
+import { NCInvoice } from './pages/NCInvoice'
 
 function App() {
 	const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -45,6 +46,7 @@ function App() {
 											<Routes>
 												<Route path='/' element={<Invoice />} />
 												<Route path='/arinvoices' element={<ARInvoice />} />
+												<Route path='/ncinvoices' element={<NCInvoice />} />
 												<Route path='/search' element={<Search />} />
 												<Route exact path='/packages' element={<PackageList />} />
 												<Route path='/packages/:id' element={<PackageDetail />} />

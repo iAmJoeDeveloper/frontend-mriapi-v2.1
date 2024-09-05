@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PackageContext } from '../context/PackageContext'
 import { Toaster, toast } from 'react-hot-toast'
+import Swal from 'sweetalert2'
 
 const PackageDetail = () => {
-	const { packages, updatePackageStatus } = useContext(PackageContext)
+	const { packages, updatePackageStatus, removeInvoice } = useContext(PackageContext)
 	const { id } = useParams()
 	// const pkg = packages.find((pkg) => pkg._id === id)
 	const [pkg, setPkg] = useState(packages.find((pkg) => pkg._id === id))
@@ -79,23 +80,6 @@ const PackageDetail = () => {
 	}
 
 	const generateQRCodes = async () => {
-		// toast.promise(
-		// 	fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
-		// 		'content-type': 'application/json',
-		// 		method: 'GET',
-		// 	}).then((response) => {
-		// 		if (!response.ok) {
-		// 			throw new Error('Error en la generación de códigos QR')
-		// 		}
-		// 		console.log(response)
-		// 	}),
-		// 	{
-		// 		loading: 'Generating QR codes...',
-		// 		success: <b>QR codes generated successfully!</b>,
-		// 		error: <b>Error generating QR codes.</b>,
-		// 	}
-		// )
-
 		try {
 			toast.promise(
 				fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
@@ -116,16 +100,37 @@ const PackageDetail = () => {
 		} catch (error) {
 			console.error('Error gerando códigos:', error)
 		}
+	}
 
-		// try {
-		// 	const response = await fetch(`http://localhost:3000/qrcodes/generate/${id}`, {
-		// 		'content-type': 'application/json',
-		// 		method: 'GET',
-		// 		//mode: 'no-cors',
-		// 	}).then((response) => console.log(response))
-		// } catch (error) {
-		// 	console.error('Error gerando códigos:', error)
-		// }
+	const deleteInvoice = async (idInvoice, idPackage) => {
+		Swal.fire({
+			title: '¿Seguro que desea eliminar esta factura?',
+			text: 'No podrás revertir esta acción',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, eliminar',
+			cancelButtonText: 'No, cancelar',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				fetch(`http://localhost:3000/package/deleteIndividualInvoice/${idInvoice}`, {
+					method: 'DELETE',
+				})
+					.then(async (response) => {
+						if (!response.ok) {
+							throw new Error('Error trying to delete record')
+						}
+
+						const data = await response.json()
+						Swal.fire('Deleted', data.message, 'success')
+						removeInvoice(idPackage, idInvoice) // ideal actualizar el estado aquí
+					})
+					.catch((error) => {
+						Swal.fire('Error', 'Hubo un problema al eliminar el registro', error)
+					})
+			}
+		})
 	}
 
 	return (
@@ -195,10 +200,13 @@ const PackageDetail = () => {
 										Name
 									</th>
 									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
-										Fecha
+										Date
 									</th>
 									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left'>
-										Estado
+										Status
+									</th>
+									<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-center'>
+										Actions
 									</th>
 								</tr>
 							</thead>
@@ -220,6 +228,14 @@ const PackageDetail = () => {
 											>
 												{invoice.status}
 											</p>
+										</td>
+										<td className='py-2 px-4 border-b border-gray-300 text-center font-bold'>
+											<span
+												onClick={() => deleteInvoice(invoice._id, pkg._id)}
+												className='cursor-pointer hover:text-red-500'
+											>
+												x
+											</span>
 										</td>
 									</tr>
 								))}

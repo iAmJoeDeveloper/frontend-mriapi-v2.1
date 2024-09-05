@@ -4,7 +4,7 @@ import MyTable from '../components/MyTable'
 import { FaSearch } from 'react-icons/fa'
 import { LiaFileInvoiceSolid, LiaFileInvoiceDollarSolid } from 'react-icons/lia'
 
-const ARInvoice = () => {
+const NCInvoice = () => {
 	const [invoiceNum, setInvoiceNum] = useState({
 		invoice1: '',
 		invoice2: '',
@@ -27,7 +27,7 @@ const ARInvoice = () => {
 	}
 
 	const callGetBatchOfInvoices = async () => {
-		await fetch(`http://localhost:3000/arinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}`, {
+		await fetch(`http://localhost:3000/ncinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}`, {
 			'content-type': 'application/json',
 			method: 'GET',
 			//mode: 'no-cors',
@@ -41,7 +41,7 @@ const ARInvoice = () => {
 		const create = true
 
 		await fetch(
-			`http://localhost:3000/arinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}/${create}`,
+			`http://localhost:3000/ncinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}/${create}`,
 			{
 				'content-type': 'application/json',
 				method: 'GET',
@@ -58,7 +58,7 @@ const ARInvoice = () => {
 	const sendInvoices = async (e) => {
 		e.preventDefault()
 
-		await fetch(`http://localhost:3000/arinvoices/sendInvoices`, {
+		await fetch(`http://localhost:3000/ncinvoices/sendInvoices`, {
 			'content-type': 'application/json',
 			method: 'GET',
 			//mode: 'no-cors',
@@ -74,7 +74,7 @@ const ARInvoice = () => {
 						<div className='2xl:mb-8 xl:mb-6 md:mb-6'>
 							<div className='w-full'>
 								<p className='text-white font-semibold 2xl:text-2xl xl:text-xl 2xl:mb-6 xl:mb-4 md:mb-2'>
-									Consultar rango de facturas AR
+									Consultar rango de Notas de Crédito
 								</p>
 								<div className='flex items-center gap-20 '>
 									<div className='flex  gap-4 w-3/5 h-10'>
@@ -115,14 +115,14 @@ const ARInvoice = () => {
 							className='flex items-center gap-4 py-2 px-5 w-52  text-black text-md overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md  hover:bg-gray-300'
 						>
 							<LiaFileInvoiceSolid className='w-6 h-6' />
-							Generar Facturas
+							Generar NC
 						</button>
 						<button
 							onClick={sendInvoices}
 							className='flex items-center gap-4 py-2 px-5 w-52  text-black text-md  overflow-hidden bg-white rounded-lg transition-all duration-400 ease-in-out shadow-md  hover:bg-gray-300'
 						>
 							<LiaFileInvoiceDollarSolid />
-							Enviar Facturas
+							Enviar NC
 						</button>
 						{/* <ButtonInfo name="Generar Facturas" onClick={callCreateInvoice} />
 						<ButtonInfo name="Enviar Facturas" onClick={sendInvoices} /> */}
@@ -138,7 +138,7 @@ const ARInvoice = () => {
 					</div>
 					<hr />
 					<p className='my-2 text-center lg:text-right xl:w-full'>
-						Total de facturas: <b>{datas.length}</b>
+						Total de Notas de crédito: <b>{datas.length}</b>
 					</p>
 				</div>
 			</div>
@@ -148,4 +148,4 @@ const ARInvoice = () => {
 	)
 }
 
-export { ARInvoice }
+export { NCInvoice }

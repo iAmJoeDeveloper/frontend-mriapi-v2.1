@@ -25,8 +25,21 @@ const PackageProvider = ({ children }) => {
 		)
 	}
 
+	// Función para eliminar un invoice
+	const removeInvoice = (packageId, invoiceId) => {
+		setPackages((prevPackages) =>
+			prevPackages.map((pkg) =>
+				pkg._id === packageId
+					? { ...pkg, invoices: pkg.invoices.filter((invoice) => invoice._id !== invoiceId) }
+					: pkg
+			)
+		)
+	}
+
 	return (
-		<PackageContext.Provider value={{ packages, updatePackageStatus, removePackage }}>
+		<PackageContext.Provider
+			value={{ packages, updatePackageStatus, removePackage, removeInvoice }}
+		>
 			{children}
 		</PackageContext.Provider>
 	)
