@@ -14,13 +14,18 @@ const Login = () => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ username, email, password }),
-		}).then((res) => {
-			if (res.ok) {
-				console.log('Sesion iniciada.... Entrando...')
-			} else {
-				console.log('Error al iniciar sesion')
-			}
 		})
+			.then((res) => {
+				return res.json()
+			})
+			.then((res) => {
+				if (res.status) {
+					console.log('Sesion iniciada.... Entrando...')
+					localStorage.setItem('jwt', res.data.token)
+				} else {
+					console.log('Error al iniciar sesion')
+				}
+			})
 	}
 
 	return (

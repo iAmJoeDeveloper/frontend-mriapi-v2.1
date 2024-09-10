@@ -27,7 +27,7 @@ const NCInvoice = () => {
 	}
 
 	const callGetBatchOfInvoices = async () => {
-		await fetch(`http://localhost:3000/ncinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}`, {
+		await fetch(`http://localhost:3000/ncinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice1}`, {
 			'content-type': 'application/json',
 			method: 'GET',
 			//mode: 'no-cors',
@@ -41,7 +41,7 @@ const NCInvoice = () => {
 		const create = true
 
 		await fetch(
-			`http://localhost:3000/ncinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice2}/${create}`,
+			`http://localhost:3000/ncinvoices/${invoiceNum.invoice1}/${invoiceNum.invoice1}/${create}`,
 			{
 				'content-type': 'application/json',
 				method: 'GET',
@@ -51,8 +51,8 @@ const NCInvoice = () => {
 			.then((response) => response.json())
 			.then((data) => setDatas(data))
 
-		console.log('enviado el array de datas')
-		toast.success('Facturas creadas con éxito')
+		console.log('enviado el array de datas...')
+		toast.success('Notas de crédito creadas con éxito')
 	}
 
 	const sendInvoices = async (e) => {
@@ -74,7 +74,7 @@ const NCInvoice = () => {
 						<div className='2xl:mb-8 xl:mb-6 md:mb-6'>
 							<div className='w-full'>
 								<p className='text-white font-semibold 2xl:text-2xl xl:text-xl 2xl:mb-6 xl:mb-4 md:mb-2'>
-									Consultar rango de Notas de Crédito
+									Consultar Nota de Crédito
 								</p>
 								<div className='flex items-center gap-20 '>
 									<div className='flex  gap-4 w-3/5 h-10'>
@@ -91,6 +91,8 @@ const NCInvoice = () => {
 										<input
 											required
 											type='text'
+											disabled={true}
+											hidden={true}
 											className='w-full 2xl:py-2 2xl:px-4 xl:py-1 xl:px-2 md:py-1 md:px-2 rounded-lg outline-none  bg-white text-black '
 											placeholder='N Factura 2'
 											onChange={handleChange}

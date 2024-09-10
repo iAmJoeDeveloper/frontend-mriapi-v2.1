@@ -11,7 +11,7 @@ const MyNavBar = ({ toggleSidebar }) => {
 		const pathToTitle = {
 			'/': 'Factura Fiscal CM',
 			'/ARInvoices': 'Factura Fiscal AR',
-			'/NCInvoices': 'Notas de Crédito',
+			'/NCInvoices': 'Notas de Crédito CM',
 			'/Packages': 'Packages',
 			'/Search': 'Consulta',
 			// Agrega más rutas y títulos según sea necesario

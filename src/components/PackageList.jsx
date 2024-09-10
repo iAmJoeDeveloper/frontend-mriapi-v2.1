@@ -87,7 +87,9 @@ const PackageList = () => {
 											className={
 												item.tag === 'CM'
 													? 'bg-gray-400 py-2 px-4 border-b rounded-sm border-gray-300 text-center bg-center   w-28 '
-													: 'bg-gray-200 py-2 px-4 border-b rounded-sm border-gray-300 text-center'
+													: item.tag === 'AR'
+													? 'bg-gray-200 py-2 px-4 border-b rounded-sm border-gray-300 text-center'
+													: 'bg-[#292D32] text-white py-2 px-4 border-b rounded-sm border-gray-300 text-center'
 											}
 										>
 											{item.tag}
