@@ -1,32 +1,24 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useAuth } from '../context/AuthContext'
 
 const Login = () => {
-	const [username, setUsername] = useState('')
-	const [password, setPassword] = useState('')
-	const email = 'example@gmail.com'
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
+	const { signIn, isAuthenticated } = useAuth()
+	const navigate = useNavigate()
 
-	const handleSubmit = (e) => {
-		e.preventDefault()
+	useEffect(() => {
+		if (isAuthenticated) navigate('/')
+	}, [isAuthenticated])
 
-		fetch('http://localhost:3000/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ username, email, password }),
-		})
-			.then((res) => {
-				return res.json()
-			})
-			.then((res) => {
-				if (res.status) {
-					console.log('Sesion iniciada.... Entrando...')
-					localStorage.setItem('jwt', res.data.token)
-				} else {
-					console.log('Error al iniciar sesion')
-				}
-			})
-	}
+	const onSubmit = handleSubmit((data) => {
+		signIn(data)
+	})
 
 	return (
 		<div className="grid grid-cols-1  lg:grid-cols-2  h-screen bg-[url('src/assets/Azul2_11zon.webp')] bg-cover lg:bg-white">
@@ -46,23 +38,22 @@ const Login = () => {
 					</div>
 
 					<div className='mt-10'>
-						<form className='space-y-8' onSubmit={handleSubmit}>
+						<form className='space-y-8' onSubmit={onSubmit}>
 							<div>
-								<label htmlFor='username' className='block text-lg font-medium   text-[#414141] '>
-									Username
+								<label htmlFor='email' className='block text-lg font-medium   text-[#414141] '>
+									Email
 								</label>
 								<div className='mt-2'>
 									<input
-										id='username'
-										name='username'
-										type='username'
-										autoComplete='username'
-										required
-										placeholder='username'
-										value={username}
-										onChange={(e) => setUsername(e.target.value)}
+										id='email'
+										name='email'
+										type='email'
+										autoComplete='email'
+										placeholder='email'
 										className='block w-full rounded-md pl-5 py-1.5 leading-9 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
+										{...register('email', { required: true })}
 									/>
+									{errors.email && <p className='text-red-500'>email is required</p>}
 								</div>
 							</div>
 
@@ -79,12 +70,11 @@ const Login = () => {
 										name='password'
 										type='password'
 										autoComplete='current-password'
-										required
 										placeholder='*********'
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
 										className='block w-full rounded-md pl-5 py-1.5 leading-9 text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300'
+										{...register('password', { required: true })}
 									/>
+									{errors.password && <p className='text-red-500'>password is required</p>}
 								</div>
 							</div>
 

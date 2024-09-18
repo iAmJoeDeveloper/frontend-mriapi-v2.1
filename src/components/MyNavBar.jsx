@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const MyNavBar = ({ toggleSidebar }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const location = useLocation()
 	const [title, setTitle] = useState('')
+	const { user, logout } = useAuth()
 
 	useEffect(() => {
 		const pathToTitle = {
 			'/': 'Factura Fiscal CM',
 			'/ARInvoices': 'Factura Fiscal AR',
 			'/NCInvoices': 'Notas de Crédito CM',
+			'/NCARInvoices': 'Notas de Crédito AR',
 			'/Packages': 'Packages',
 			'/Search': 'Consulta',
 			// Agrega más rutas y títulos según sea necesario
@@ -40,8 +43,11 @@ const MyNavBar = ({ toggleSidebar }) => {
 						className='w-10 h-10 bg-gray-500  rounded-3xl hidden xl:block'
 					/>
 					<div>
-						<h3 className='font-bold text-black  hidden xl:block'>BlueMall User</h3>
+						<h3 className='font-bold text-black  hidden xl:block'>
+							{user ? user.username : 'BlueMall User'}
+						</h3>
 						<span className='text-sm hidden xl:block'>Admin</span>
+						<button onClick={() => logout(user)}>Cerrar Sesión</button>
 					</div>
 				</div>
 			</nav>
