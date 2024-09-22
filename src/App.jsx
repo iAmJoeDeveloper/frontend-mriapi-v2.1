@@ -17,6 +17,7 @@ import { ARInvoice } from './pages/ARInvoice'
 import { Search } from './pages/Search'
 import { NCInvoice } from './pages/NCInvoice'
 import { NCARInvoice } from './pages/NCARInvoice'
+import { Users } from './pages/Users'
 
 // Context
 import { AuthProvider } from './context/AuthContext'
@@ -61,6 +62,7 @@ function App() {
 														<Route path='/search' element={<Search />} />
 														<Route exact path='/packages' element={<PackageList />} />
 														<Route path='/packages/:id' element={<PackageDetail />} />
+														<Route path='/users' element={<Users />} />
 													</Route>
 												</Routes>
 											</div>

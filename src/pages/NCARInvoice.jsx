@@ -4,7 +4,15 @@ import MyTable from '../components/MyTable'
 import { FaSearch } from 'react-icons/fa'
 import { LiaFileInvoiceSolid, LiaFileInvoiceDollarSolid } from 'react-icons/lia'
 
+// Context
+import { useAuth } from '../context/AuthContext'
+
 const NCARInvoice = () => {
+	// User
+	const { user } = useAuth()
+	const username = user ? user.username : ''
+	// --------
+
 	const [invoiceNum, setInvoiceNum] = useState({
 		invoice1: '',
 		invoice2: '',
@@ -61,7 +69,7 @@ const NCARInvoice = () => {
 	const sendInvoices = async (e) => {
 		e.preventDefault()
 
-		await fetch(`http://localhost:3000/ncarinvoices/sendInvoices`, {
+		await fetch(`http://localhost:3000/ncarinvoice/sendInvoices/${username}`, {
 			'content-type': 'application/json',
 			method: 'GET',
 			//mode: 'no-cors',

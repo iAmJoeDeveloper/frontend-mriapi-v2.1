@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { json, Link } from 'react-router-dom'
 import { PackageContext } from '../context/PackageContext'
+import { useAuth } from '../context/AuthContext'
 import ReactPaginate from 'react-paginate'
 import Swal from 'sweetalert2'
 
@@ -9,6 +10,8 @@ const PackageList = () => {
 	const itemsPerPage = 10 // Definir cuántos elementos quieres mostrar por página
 
 	const [currentPage, setCurrentPage] = useState(0)
+
+	const { user } = useAuth()
 
 	const handlePageClick = ({ selected }) => {
 		setCurrentPage(selected)
@@ -45,7 +48,31 @@ const PackageList = () => {
 		})
 	}
 
-	const sortedPackages = packages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+	// const packagesFilteredByUser = packages.filter((item) => item.user === user.username)
+
+	const formatDates = (originalDate) => {
+		const dateObj = new Date(originalDate)
+		const formattedDate = dateObj.toISOString().split('T')[0]
+		const formattedTime = dateObj.toLocaleTimeString('es-ES', {
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false,
+		})
+
+		return { formattedDate, formattedTime }
+	}
+
+	const packagesFilteredByUser = (paquetes) => {
+		if (user.role === 'user') {
+			return packages.filter((item) => item.user === user.username)
+		}
+
+		return paquetes
+	}
+
+	const totalPackages = packagesFilteredByUser(packages)
+
+	const sortedPackages = totalPackages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
 	const offset = currentPage * itemsPerPage
 	const currentPackages = sortedPackages.slice(offset, offset + itemsPerPage)
@@ -72,6 +99,12 @@ const PackageList = () => {
 									Date
 								</th>
 								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left sticky top-0 z-10'>
+									Time
+								</th>
+								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left sticky top-0 z-10'>
+									User
+								</th>
+								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left sticky top-0 z-10'>
 									Estatus
 								</th>
 								<th className='py-2 px-4 bg-[#292D32] text-white border-b-2 border-gray-300 text-left sticky top-0 z-10'>
@@ -80,71 +113,77 @@ const PackageList = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{currentPackages.map((item) => (
-								<tr key={item._id}>
-									<td className={'py-2 px-4 border-b border-gray-300 text-center'}>
-										<span
-											className={
-												item.tag === 'CM'
-													? 'bg-gray-400 py-2 px-4 border-b rounded-sm border-gray-300 text-center bg-center   w-28 '
-													: item.tag === 'AR'
-													? 'bg-gray-200 py-2 px-4 border-b rounded-sm border-gray-300 text-center'
-													: 'bg-[#292D32] text-white py-2 px-4 border-b rounded-sm border-gray-300 text-center'
-											}
-										>
-											{item.tag}
-										</span>
-									</td>
-									<td className='py-2 px-4 border-b border-gray-300 '>{item.name}</td>
+							{currentPackages.map((item) => {
+								const { formattedDate, formattedTime } = formatDates(item.createdAt)
 
-									<td className='py-2 px-4 border-b border-gray-300'>{item.entity}</td>
+								return (
+									<tr key={item._id}>
+										<td className={'py-2 px-4 border-b border-gray-300 text-center'}>
+											<span
+												className={
+													item.tag === 'CM'
+														? 'bg-gray-400 py-2 px-4 border-b rounded-sm border-gray-300 text-center bg-center   w-28 '
+														: item.tag === 'AR'
+														? 'bg-gray-200 py-2 px-4 border-b rounded-sm border-gray-300 text-center'
+														: 'bg-[#292D32] text-white py-2 px-4 border-b rounded-sm border-gray-300 text-center'
+												}
+											>
+												{item.tag}
+											</span>
+										</td>
+										<td className='py-2 px-4 border-b border-gray-300 '>{item.name}</td>
 
-									<td className='py-2 px-4 border-b border-gray-300'>{item.createdAt}</td>
-									<td className='py-2 px-4 border-b border-gray-300'>
-										<p
-											className={
-												item.status === 'completed'
-													? 'bg-green-200 rounded-full  w-28  text-black   bg-center py-1  text-center'
-													: item.status === 'canceled'
-													? 'bg-red-200 rounded-full  w-28  text-black   bg-center py-1  text-center'
-													: 'bg-orange-400 rounded-full  w-28  text-black   bg-center py-1  text-center'
-											}
-										>
-											{item.status}
-										</p>
-									</td>
+										<td className='py-2 px-4 border-b border-gray-300'>{item.entity}</td>
 
-									<td className='py-2 px-4 border-b border-gray-300 '>
-										<Link to={`/packages/${item._id}`}>
-											<button className='bg-gray-500 mr-2 hover:bg-gray-400 text-white px-4 py-2 rounded'>
-												<svg viewBox='0 0 1024 1024' fill='currentColor' height='1em' width='1em'>
-													<path d='M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z' />
+										<td className='py-2 px-4 border-b border-gray-300'>{formattedDate}</td>
+										<td className='py-2 px-4 border-b border-gray-300'>{formattedTime}</td>
+										<td className='py-2 px-4 border-b border-gray-300'>{item.user}</td>
+										<td className='py-2 px-4 border-b border-gray-300'>
+											<p
+												className={
+													item.status === 'completed'
+														? 'bg-green-200 rounded-full  w-28  text-black   bg-center py-1  text-center'
+														: item.status === 'canceled'
+														? 'bg-red-200 rounded-full  w-28  text-black   bg-center py-1  text-center'
+														: 'bg-orange-400 rounded-full  w-28  text-black   bg-center py-1  text-center'
+												}
+											>
+												{item.status}
+											</p>
+										</td>
+
+										<td className='py-2 px-4 border-b border-gray-300 '>
+											<Link to={`/packages/${item._id}`}>
+												<button className='bg-gray-500 mr-2 hover:bg-gray-400 text-white px-4 py-2 rounded'>
+													<svg viewBox='0 0 1024 1024' fill='currentColor' height='1em' width='1em'>
+														<path d='M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z' />
+													</svg>
+												</button>
+											</Link>
+
+											<button
+												onClick={() => deletePackage(item._id)}
+												className='bg-gray-500 hover:bg-red-500 text-white px-4 py-2 rounded'
+											>
+												<svg fill='currentColor' viewBox='0 0 16 16' height='1em' width='1em'>
+													<path d='M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z' />
+													<path
+														fillRule='evenodd'
+														d='M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'
+													/>
 												</svg>
 											</button>
-										</Link>
-
-										<button
-											onClick={() => deletePackage(item._id)}
-											className='bg-gray-500 hover:bg-red-500 text-white px-4 py-2 rounded'
-										>
-											<svg fill='currentColor' viewBox='0 0 16 16' height='1em' width='1em'>
-												<path d='M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z' />
-												<path
-													fillRule='evenodd'
-													d='M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'
-												/>
-											</svg>
-										</button>
-									</td>
-								</tr>
-							))}
+										</td>
+									</tr>
+								)
+							})}
 						</tbody>
 					</table>
 				</div>
 				<ReactPaginate
 					previousLabel={'<'}
 					nextLabel={'>'}
-					pageCount={Math.ceil(packages.length / itemsPerPage)}
+					pageCount={Math.ceil(totalPackages.length / itemsPerPage)}
 					onPageChange={handlePageClick}
 					containerClassName={'flex justify-center mt-4'}
 					pageClassName={'mx-1'}

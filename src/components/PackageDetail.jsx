@@ -143,7 +143,13 @@ const PackageDetail = () => {
 						{isRunning ? <span className='ml-2'>🟢</span> : <span className='ml-2'>🔴</span>}
 					</h1>
 					<p className='text-lg font-semibold'>
+						Module: <span className='font-normal'>{pkg.tag}</span>
+					</p>
+					<p className='text-lg font-semibold'>
 						Entity: <span className='font-normal'>{pkg.entity}</span>
+					</p>
+					<p className='text-lg font-semibold'>
+						User: <span className='font-normal'>{pkg.user}</span>
 					</p>
 					<p className='text-lg font-semibold'>
 						Status: <span className='font-normal'>{pkg.status}</span>

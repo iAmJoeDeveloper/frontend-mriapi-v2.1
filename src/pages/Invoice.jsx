@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
 import MyTable from '../components/MyTable'
-import ButtonInfo from '../components/ButtonInfo'
 import { FaSearch } from 'react-icons/fa'
 import { LiaFileInvoiceSolid, LiaFileInvoiceDollarSolid } from 'react-icons/lia'
 
+// Context
+import { useAuth } from '../context/AuthContext'
+
 function Invoice() {
+	// User
+	const { user } = useAuth()
+	const username = user ? user.username : ''
+	// --------
+
 	const [invoiceNum, setInvoiceNum] = useState({
 		invoice1: '',
 		invoice2: '',
@@ -62,7 +69,7 @@ function Invoice() {
 	const sendInvoices = async (e) => {
 		e.preventDefault()
 
-		await fetch(`http://localhost:3000/facturas/sendInvoices`, {
+		await fetch(`http://localhost:3000/facturas/sendInvoices/${username}`, {
 			'content-type': 'application/json',
 			method: 'GET',
 			//mode: 'no-cors',

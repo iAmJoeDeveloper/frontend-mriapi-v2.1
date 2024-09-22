@@ -15,9 +15,9 @@ const MyNavBar = ({ toggleSidebar }) => {
 			'/ARInvoices': 'Factura Fiscal AR',
 			'/NCInvoices': 'Notas de Crédito CM',
 			'/NCARInvoices': 'Notas de Crédito AR',
-			'/Packages': 'Packages',
-			'/Search': 'Consulta',
-			// Agrega más rutas y títulos según sea necesario
+			'/packages': 'Packages',
+			'/search': 'Consulta',
+			'/users': 'Users',
 		}
 		const currentTitle = pathToTitle[location.pathname] || ''
 		setTitle(currentTitle)
@@ -46,7 +46,8 @@ const MyNavBar = ({ toggleSidebar }) => {
 						<h3 className='font-bold text-black  hidden xl:block'>
 							{user ? user.username : 'BlueMall User'}
 						</h3>
-						<span className='text-sm hidden xl:block'>Admin</span>
+						{/* <span className='text-sm hidden xl:block'>{user ? user.email : ''}</span> */}
+						<span className='text-sm hidden xl:block'>{user ? user.role : ''}</span>
 						<button onClick={() => logout(user)}>Cerrar Sesión</button>
 					</div>
 				</div>
