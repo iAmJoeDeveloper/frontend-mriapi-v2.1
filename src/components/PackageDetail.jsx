@@ -34,7 +34,7 @@ const PackageDetail = () => {
 		if (!isRunning) {
 			const id = setInterval(() => {
 				checkDocumentStatus(pkg._id)
-			}, 1 * 60 * 1000) // 5 minutos en milisegundos
+			}, 5 * 60 * 1000) // 5 minutos en milisegundos
 			setIntervalId(id)
 			setIsRunning(true)
 		}
