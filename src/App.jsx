@@ -18,11 +18,14 @@ import { Search } from './pages/Search'
 import { NCInvoice } from './pages/NCInvoice'
 import { NCARInvoice } from './pages/NCARInvoice'
 import { Users } from './pages/Users'
+import { UserDetail } from './pages/UserDetail'
+import { RegisterUser } from './pages/RegisterUser'
 
 // Context
 import { AuthProvider } from './context/AuthContext'
 
 import ProtectedRoute from './ProtectedRoute'
+import ProtectedRole from './ProtectedRole'
 
 function App() {
 	const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -55,6 +58,7 @@ function App() {
 											<div className=''>
 												<Routes>
 													<Route element={<ProtectedRoute />}>
+														<Route path='*' element={<Invoice />} />
 														<Route path='/' element={<Invoice />} />
 														<Route path='/arinvoices' element={<ARInvoice />} />
 														<Route path='/ncinvoices' element={<NCInvoice />} />
@@ -62,7 +66,11 @@ function App() {
 														<Route path='/search' element={<Search />} />
 														<Route exact path='/packages' element={<PackageList />} />
 														<Route path='/packages/:id' element={<PackageDetail />} />
-														<Route path='/users' element={<Users />} />
+														<Route element={<ProtectedRole />}>
+															<Route path='/users' element={<Users />} />
+															<Route path='/users/:id' element={<UserDetail />} />
+															<Route path='/users/register' element={<RegisterUser />} />
+														</Route>
 													</Route>
 												</Routes>
 											</div>

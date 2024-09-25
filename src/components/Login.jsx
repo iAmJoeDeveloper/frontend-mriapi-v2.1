@@ -21,7 +21,7 @@ const Login = () => {
 	})
 
 	return (
-		<div className="grid grid-cols-1  lg:grid-cols-2  h-screen bg-[url('src/assets/Azul2_11zon.webp')] bg-cover lg:bg-white ">
+		<div className="grid grid-cols-1  lg:grid-cols-2  h-screen bg-[url('src/assets/Azul2_11zon.webp')] bg-cover lg:bg-white">
 			<div className="hidden lg:block  relative w-full bg-[url('src/assets/wtc.webp')] bg-no-repeat bg-cover bg-center">
 				<div className=' sm:absolute inset-0 bg-black opacity-70'></div>
 				<div className='flex justify-center items-center h-full'>
